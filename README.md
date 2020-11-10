@@ -22,4 +22,4 @@ If you want to run locally the project:
 * The Coding Train [Youtube channel](https://www.youtube.com/c/TheCodingTrain/featured)
 * The Coding Train [Matrix tutorial](https://www.youtube.com/watch?v=S1TQCi9axzg)
 * [P5.js](https://p5js.org/examples/) examples
-* [The Matrix](https://www.imdb.com/title/tt0133093/)  movie
+* [The Matrix](https://www.imdb.com/title/tt0133093/) movie
