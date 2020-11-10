@@ -1,80 +1,82 @@
-var streams = [];
-var fontSize = 25;
-Symbol.COLOR = "rgb(0, 255, 10)";
+let streams = [];
 
-function setup() {
+const setup = () => {
 	createCanvas(window.innerWidth, window.innerHeight);
 	background(0);
-	textSize(fontSize);
+	textSize(Symbol.FONT_SIZE);
 	initSymbolStreams();
 }
 
-function initSymbolStreams() {
+const initSymbolStreams = () => {
 	streams = [];
-	var x = 0;
+	let x = 0;
 
-	for(var i = 0; i < width / fontSize; i++) {
-		var stream = new SymbolsStream(x);
+	for(let i = 0; i < width / Symbol.FONT_SIZE; i++) {
+		let stream = new SymbolsStream(x);
 		streams.push(stream);
-		x += fontSize;
+		x += Symbol.FONT_SIZE;
 	}
 }
 
-function draw() {
+const draw = () => {
 	background(0, 0,0,130);
 
-	for(var i = 0; i < streams.length; i++) {
-		streams[i].render();
+	for(let str in streams) {
+		streams[str].render();
 	}
 }
 
-function Symbol(x, y, speed) {
-	this.x = x;
-	this.y = y;
-	this.speed = speed;
-	this.updateInterval = round(random(2, 25));
-
-	this.value;
-	this.setRandomValue = function() {
-		this.value = String.fromCharCode(0x30A0 + round(random(0, 96))); // katakana alphabet
+class Symbol {
+	constructor(x, y, speed) {
+		this.x = x;
+		this.y = y;
+		this.speed = speed;
+		this.updateInterval = round(random(2, 25));
+		this.value = this.setRandomValue();
 	}
 
-	this.setRandomValue();
+	setRandomValue() {
+		return String.fromCharCode(0x30A0 + round(random(0, 96))); // katakana alphabet
+	}
 
-	this.render = function() {
+	render() {
 		fill(Symbol.COLOR);
 		text(this.value, this.x, this.y);
 	}
 
-	this.update = function() {
+	update() {
 		this.y = (this.y > height) ? 0 : this.y + this.speed;
 		if(frameCount % this.updateInterval == 0) {
-			this.setRandomValue();
+			this.value = this.setRandomValue();
 		}
 	}
-}
+};
 
-function SymbolsStream(x) {
-	var symbols = [];
-	var symbolsCount = round(random(8, 35));
-	var streamSpeed = round(random(5, 15));
-	var streamY = round(random(-1000, 0));
+Symbol.COLOR = "rgb(0, 255, 10)";
+Symbol.FONT_SIZE = 25;
 
-	for(var i = 0; i < symbolsCount; i++) {
-		var symbol = new Symbol(x, streamY, streamSpeed);
-		symbols.push(symbol);
-		streamY -= fontSize;
-	}
+class SymbolsStream {
+	constructor(x) {
+		this.symbols = [];
+		this.symbolsCount = round(random(8, 35));
+		this.streamSpeed = round(random(5, 15));
+		this.streamY = round(random(-1000, 0));
 
-	this.render = function() {
-		for(var i = 0; i < symbolsCount; i++) {
-			symbols[i].render();
-			symbols[i].update();
+		for(let i = 0; i < this.symbolsCount; i++) {
+			this.symbols.push(new Symbol(x, this.streamY, this.streamSpeed));
+			this.streamY -= Symbol.FONT_SIZE;
 		}
 	}
-}
 
-function windowResized() {
+	render() {
+		for(let sym in this.symbols) {
+			this.symbols[sym].render();
+			this.symbols[sym].update();
+		}
+	}
+};
+
+const windowResized = () => {
 	resizeCanvas(windowWidth, windowHeight);
 	initSymbolStreams();
 }

@@ -1,0 +1,32 @@
+{
+  "name": "matrix",
+  "version": "1.0.0",
+  "description": "Demonstration of P5.js library usage to build a Matrix move source code example",
+  "main": "sketch.js",
+  "scripts": {
+    "build": "babel sketch.js -d dist",
+    "start": "babel sketch.js -d dist && serve .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/luca1388/matrix.git"
+  },
+  "keywords": [
+    "javascript",
+    "html",
+    "p5.js"
+  ],
+  "author": "luca1388",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/luca1388/matrix/issues"
+  },
+  "homepage": "https://github.com/luca1388/matrix#readme",
+  "devDependencies": {
+    "@babel/cli": "^7.12.1",
+    "@babel/core": "^7.12.3",
+    "@babel/preset-env": "^7.12.1",
+    "serve": "^11.3.2"
+  }
+}

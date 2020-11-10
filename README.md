@@ -10,7 +10,13 @@ This is a simple example to demonstrate how to use P5.js library to create graph
 * Javascript
 * HTML
 
-This example doesn't have a build tool since the main library needs to be imported via HTML import script.
+### Usage
+If you want to build the project:
+`npm run build` 
+
+If you want to run locally the project:
+`npm run start`
+
 
 ## Acknowledgements
 * The Coding Train [Youtube channel](https://www.youtube.com/c/TheCodingTrain/featured)
